@@ -1,0 +1,17 @@
+pipeline{
+    agent any
+
+    stages{
+        stage("Extract Data"){
+            steps{
+                sh 'python3 data_extraction.py'
+            }
+        }
+    }
+    post{
+       
+        always {
+            archiveArtifacts artifacts: 'loan_data_cleansed.csv', onlyIfSuccessful: true
+        }
+            }
+}
